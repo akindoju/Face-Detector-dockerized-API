@@ -26,13 +26,13 @@ app.use(cors())
 app.use(bodyParser.json())
 
 
-app.get('/', (req, res) => {res.send(database.users)})
+app.get('/', (req, res) => {res.send('Up and running')})
 app.post('/SignIn', (req, res) => {SignIn.handleSignIn(req, res, db, bcrypt)})
 app.post('/Register', (req, res) => {Register.handleRegister(req, res, db, bcrypt)})
 app.get('/Profile/:id', (req, res) => {Profile.handleProfileGet(req, res, db)})
 app.put('/image', (req, res) => {Image.handleImage(req, res, db)})
 app.post('/imageUrl', (req, res) => {Image.handleAPICall(req, res)})
 
-app.listen(3001, () => {
-    console.log("app is running on port 3001")
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`app is running on port ${process.env.PORT}`)
 })
