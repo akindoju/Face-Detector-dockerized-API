@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt-nodejs");
 const cors = require("cors");
 const knex = require("knex");
+require("dotenv").config();
 
 const Register = require("./Controllers/Register.js");
 const SignIn = require("./Controllers/SignIn.js");
@@ -12,10 +13,10 @@ const Image = require("./Controllers/Image.js");
 const db = knex({
   client: "pg",
   connection: {
-    host: "127.0.0.1",
+    host: "localhost",
     user: "postgres",
-    password: "",
-    database: "Face-Detector",
+    password: process.env.SERVER_PASSWORD,
+    database: "face-detector1",
   },
 });
 
@@ -27,13 +28,13 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("Up and running");
 });
-app.post("/SignIn", (req, res) => {
+app.post("/signIn", (req, res) => {
   SignIn.handleSignIn(req, res, db, bcrypt);
 });
-app.post("/Register", (req, res) => {
+app.post("/register", (req, res) => {
   Register.handleRegister(req, res, db, bcrypt);
 });
-app.get("/Profile/:id", (req, res) => {
+app.get("/profile/:id", (req, res) => {
   Profile.handleProfileGet(req, res, db);
 });
 app.put("/image", (req, res) => {
