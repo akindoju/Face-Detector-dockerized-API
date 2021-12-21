@@ -1,0 +1,13 @@
+version: //docker-compose version
+
+services:
+  Face-Detector-API:
+    container_name: backend
+    # image: node:16.3.1
+    build: ./
+    command: npm start
+    working_dir: /usr/src/Face-Detector-API
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/Face-Detector-API
