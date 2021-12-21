@@ -12,12 +12,7 @@ const Image = require("./Controllers/Image.js");
 
 const db = knex({
   client: "pg",
-  connection: {
-    host: "localhost",
-    user: "postgres",
-    password: process.env.SERVER_PASSWORD,
-    database: "face-detector1",
-  },
+  connection: process.env.POSTGRES_URI,
 });
 
 const app = express();
