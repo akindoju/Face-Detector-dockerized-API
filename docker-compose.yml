@@ -9,8 +9,6 @@ services:
     working_dir: /usr/src/Face-Detector-API
     environment:
       POSTGRES_URI: postgres://akindoju:123456@postgres:5432/face-detector-docker
-    links:
-      - postgres
     ports:
       - "3000:3000"
     volumes:
