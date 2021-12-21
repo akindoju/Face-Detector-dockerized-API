@@ -1,26 +1,27 @@
-version: //docker-compose version
+version: "3.9"
 
 services:
   # Backedn-API
-  Face-Detector-API:
+  face-detector-api:
     container_name: backend
     build: ./
     command: npm start
-    working_dir: /usr/src/Face-Detector-API
+    working_dir: /usr/src/face-detector-api
     environment:
       POSTGRES_URI: postgres://akindoju:123456@postgres:5432/face-detector-docker
     ports:
       - "3000:3000"
     volumes:
-      - ./:/usr/src/Face-Detector-API
+      - ./:/usr/src/face-detector-api
 
   # Postgres
   postgres:
-  environment:
-    POSTGRES_USER: akindoju
-    POSTGRES_PASSWORD: 123456
-    POSTGRES_DB: face-detector-docker
-    POSTGRES_HOST: postgres
+    container_name: postgres
     build: ./postgres
+    environment:
+      POSTGRES_USER: akindoju
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: face-detector-docker
+      POSTGRES_HOST: postgres
     ports:
       - "5432:5432"
