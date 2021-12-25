@@ -29,6 +29,9 @@ app.post("/signIn", (req, res) => {
 app.post("/register", (req, res) => {
   Register.handleRegister(req, res, db, bcrypt);
 });
+app.post("/profile/:id", (req, res) => {
+  Profile.handleProfileUpdate(req, res, db);
+});
 app.get("/profile/:id", (req, res) => {
   Profile.handleProfileGet(req, res, db);
 });
