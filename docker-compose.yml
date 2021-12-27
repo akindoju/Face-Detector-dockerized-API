@@ -9,6 +9,7 @@ services:
     working_dir: /usr/src/face-detector-api
     environment:
       POSTGRES_URI: postgres://akindoju:123456@postgres:5432/face-detector-docker
+      REDIS_URI: redis://redis:6379
     ports:
       - "3000:3000"
     volumes:
@@ -25,3 +26,8 @@ services:
       POSTGRES_HOST: postgres
     ports:
       - "5432:5432"
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
