@@ -9,6 +9,7 @@ const register = require("./Controllers/register.js");
 const signIn = require("./Controllers/signIn.js");
 const profile = require("./Controllers/profile.js");
 const image = require("./Controllers/image.js");
+const auth = require("./Controllers/authorization");
 
 const db = knex({
   client: "pg",
@@ -30,19 +31,19 @@ app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
 
-app.post("/profile/:id", (req, res) => {
+app.post("/profile/:id", auth.requireAuth, (req, res) => {
   profile.handleProfileUpdate(req, res, db);
 });
 
-app.get("/profile/:id", (req, res) => {
+app.get("/profile/:id", auth.requireAuth, (req, res) => {
   profile.handleProfileGet(req, res, db);
 });
 
-app.put("/image", (req, res) => {
+app.put("/image", auth.requireAuth, (req, res) => {
   image.handleImage(req, res, db);
 });
 
-app.post("/imageUrl", (req, res) => {
+app.post("/imageUrl", auth.requireAuth, (req, res) => {
   image.handleAPICall(req, res);
 });
 
