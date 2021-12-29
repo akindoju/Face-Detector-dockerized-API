@@ -6,7 +6,7 @@ const knex = require("knex");
 require("dotenv").config();
 
 const register = require("./Controllers/register.js");
-const signIn = require("./Controllers/signIn.js");
+const signin = require("./Controllers/signin.js");
 const profile = require("./Controllers/profile.js");
 const image = require("./Controllers/image.js");
 const auth = require("./Controllers/authorization");
@@ -15,6 +15,16 @@ const db = knex({
   client: "pg",
   connection: process.env.POSTGRES_URI,
 });
+
+// const db = knex({
+//   client: "pg",
+//   connection: {
+//     host: "127.0.0.1",
+//     user: "postgres",
+//     password: process.env.SERVER_PASSWORD,
+//     database: "face-detector1",
+//   },
+// });
 
 const app = express();
 
@@ -25,7 +35,7 @@ app.get("/", (req, res) => {
   res.send("Up and running");
 });
 
-app.post("/signIn", signIn.signInAuthentication(db, bcrypt));
+app.post("/signin", signin.signinAuthentication(db, bcrypt));
 
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
